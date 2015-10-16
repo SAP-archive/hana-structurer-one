@@ -1,0 +1,3 @@
+role Summit15.data::summit15 {
+	catalog schema "SUMMIT2015": SELECT, INSERT, UPDATE, DELETE, DROP, EXECUTE;
+}

@@ -1,0 +1,9 @@
+import = [ 
+     	     {
+     	     	schema = "SUMMIT2015";
+                table = "Summit15.data::country";
+                file = "Summit15.data.csv:countries.csv";
+                header = false;
+                delimField = ",";
+            }
+         ];

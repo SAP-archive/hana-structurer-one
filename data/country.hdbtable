@@ -1,0 +1,8 @@
+table.schemaName = "SUMMIT2015";  
+table.tableType = COLUMNSTORE;  
+table.columns = [    
+    {name = "Country"; sqlType = NVARCHAR; nullable = false; length = 140;},
+    {name = "A2"; sqlType = NVARCHAR; length = 2; nullable = false;} 
+    
+    ];   
+table.primaryKey.pkcolumns = ["Country"];   

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Dimension:dimension xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:AccessControl="http://www.sap.com/ndb/SQLCoreModelAccessControl.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" schemaVersion="1.2" id="SAP_AT_LOCATION" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" visibility="internal" dimensionType="Standard">
+  <descriptions defaultDescription="SAP_AT_LOCATION"/>
+  <attributes>
+    <attribute id="Id" order="1" attributeHierarchyActive="false" displayAttribute="false" key="true">
+      <descriptions defaultDescription="Id"/>
+      <keyMapping schemaName="SUMMIT2015" columnObjectName="$TA_LOCATIONB" columnName="Id"/>
+    </attribute>
+    <attribute id="TA_TOKEN" hidden="true" order="2" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="TA_TOKEN"/>
+      <keyMapping schemaName="SUMMIT2015" columnObjectName="$TA_LOCATIONB" columnName="TA_TOKEN"/>
+    </attribute>
+    <attribute id="TA_TYPE" hidden="true" order="3" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="TA_TYPE"/>
+      <keyMapping schemaName="SUMMIT2015" columnObjectName="$TA_LOCATIONB" columnName="TA_TYPE"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes>
+    <calculatedAttribute id="COUNTRY" hidden="false" order="4" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="COUNTRY"/>
+      <keyCalculation datatype="VARCHAR" length="50" scale="0">
+        <formula>if(&quot;TA_TYPE&quot;= 'COUNTRY',&quot;TA_TOKEN&quot;,'')</formula>
+      </keyCalculation>
+    </calculatedAttribute>
+    <calculatedAttribute id="CITY" hidden="false" order="5" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="CITY"/>
+      <keyCalculation datatype="VARCHAR" length="50" scale="0">
+        <formula>if(&quot;TA_TYPE&quot;= 'LOCALITY',&quot;TA_TOKEN&quot;,'')</formula>
+      </keyCalculation>
+    </calculatedAttribute>
+  </calculatedAttributes>
+  <privateDataFoundation>
+    <tableProxies>
+      <tableProxy>
+        <table schemaName="SUMMIT2015" columnObjectName="$TA_LOCATIONB"/>
+        <columnFilter columnName="TA_TYPE">
+          <valueFilter xsi:type="AccessControl:ListValueFilter" operator="IN" including="true">
+            <operands value="COUNTRY"/>
+            <operands value="LOCALITY"/>
+          </valueFilter>
+        </columnFilter>
+      </tableProxy>
+    </tableProxies>
+    <joins/>
+    <layout>
+      <shapes>
+        <shape modelObjectName="$TA_LOCATIONB" modelObjectNameSpace="SUMMIT2015" modelObjectType="catalog">
+          <upperLeftCorner x="70" y="30"/>
+        </shape>
+        <shape modelObjectName="DataFoundation" modelObjectNameSpace="DataFoundation" modelObjectType="repository">
+          <upperLeftCorner x="40" y="85"/>
+          <rectangleSize height="0" width="0"/>
+        </shape>
+      </shapes>
+    </layout>
+  </privateDataFoundation>
+  <hierarchies/>
+</Dimension:dimension>

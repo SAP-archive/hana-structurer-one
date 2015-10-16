@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.2" id="SAP_CA_SENTIMENTS" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="crossClient" defaultLanguage="$$language$$" visibility="reportingEnabled" calculationScenarioType="SCRIPT_BASED" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" scriptParametersCaseSensitive="true">
+  <descriptions defaultDescription="SAP_CA_COUNTS"/>
+  <localVariables/>
+  <variableMappings/>
+  <dataSources/>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:SqlScriptView" id="Script_View">
+      <viewAttributes>
+        <viewAttribute datatype="VARCHAR" id="BRAND" length="100"/>
+        <viewAttribute datatype="VARCHAR" id="SENTIMENT" length="100"/>
+        <viewAttribute datatype="BIGINT" id="COUNTS"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <definition> 
+ /********* Begin Procedure Script ************/ 
+ BEGIN 
+ 	 var_out = 
+ 	 select &quot;Keyword&quot; as &quot;BRAND&quot;,
+ 	 		&quot;Type&quot; as &quot;SENTIMENT&quot;, count( distinct &quot;Element&quot;) as  &quot;COUNTS&quot;
+ 	 from &quot;_SYS_BIC&quot;.&quot;Summit15.Models/SAP_AN_TWEETB&quot;
+ 	 where &quot;Type&quot; in ('Sentiment', 'StrongPositiveSentiment',
+ 	 				 'WeakPositiveSentiment', 'StrongNegativeSentiment',
+ 	 				 'WeakNegativeSentiment', 'NeutralSentiment')
+ 	 group by &quot;Keyword&quot;, &quot;Type&quot;;
+ 	 
+END; /********* End Procedure Script ************/</definition>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Script_View">
+    <attributes>
+      <attribute id="BRAND" order="1">
+        <descriptions defaultDescription="BRAND"/>
+        <keyMapping columnObjectName="Script_View" columnName="BRAND"/>
+      </attribute>
+      <attribute id="SENTIMENT" order="2">
+        <descriptions defaultDescription="USERS"/>
+        <keyMapping columnObjectName="Script_View" columnName="SENTIMENT"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="COUNTS" order="3" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="TYPE"/>
+        <measureMapping columnObjectName="Script_View" columnName="COUNTS"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

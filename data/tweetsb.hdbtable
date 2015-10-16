@@ -1,0 +1,17 @@
+table.schemaName = "SUMMIT2015";  
+table.tableType = COLUMNSTORE;  
+table.columns = [  
+    {name = "Id"; sqlType = NVARCHAR; length = 20; nullable = false;},  
+    {name = "UserName"; sqlType = NVARCHAR; length = 100; nullable = false;},  
+    {name = "ProfileImg"; sqlType = NVARCHAR; nullable = true; length = 200;},    
+    {name = "Followers"; sqlType = INTEGER; nullable = false;},  
+    {name = "Text"; sqlType = NVARCHAR; nullable = false; length = 340;},  
+    {name = "Keyword"; sqlType = NVARCHAR; nullable = false; length = 140;},  
+    {name = "Language"; sqlType = NVARCHAR; nullable = false; length = 3;},  
+    {name = "Location"; sqlType = NVARCHAR; nullable = true; length = 100;},    
+    {name = "CreateAt"; sqlType = DATE; nullable = false;}    
+    ];   
+table.indexes =  [
+    {name = "DATEB"; unique = false; order = DSC; indexColumns = ["CreateAt"];},
+    {name = "FOLLOWERSB"; unique = false; order = DSC; indexColumns = ["Followers"];}];
+table.primaryKey.pkcolumns = ["Id"];   

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="UTF-8">
+        <title>Structurer One | B1 Innovation Summit</title>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+        name="viewport">
+        <!-- bootstrap 3.0.2 -->
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <!-- font Awesome -->
+        <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <!-- Ionicons -->
+        <link href="css/ionicons.min.css" rel="stylesheet" type="text/css">
+        <!-- Theme style -->
+        <link href="css/AdminLTE.css" rel="stylesheet" type="text/css">
+    </head>
+    
+    <body class="skin-blue">
+        <!-- header logo: style can be found in header.less -->
+        <header class="header">
+            <a href="index.html" class="logo">
+
+                <!-- Add the class icon to your logo image or logo icon to add the margining -->
+
+                Structurer One
+
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas"
+                role="button">
+
+                    <span class="sr-only">Toggle navigation</span>
+
+                    <span class="icon-bar"></span>
+
+                    <span class="icon-bar"></span>
+
+                    <span class="icon-bar"></span>
+
+                </a>
+                <div class="navbar-right">
+                    <ul class="nav navbar-nav">
+                        <!-- Messages: style can be found in dropdown.less-->
+                        <!-- Notifications: style can be found in dropdown.less -->
+                        <!-- Tasks: style can be found in dropdown.less -->
+                        <!-- User Account: style can be found in dropdown.less -->
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+
+                                <i class="glyphicon glyphicon-user"></i>
+
+                                <span>@Ralphive <i class="caret"></i></span>
+
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li class="user-header bg-light-blue">
+                                    <img src="img/avatar3.png" class="img-circle" alt="User Image">
+                                    <p>Ralph Oliveira - Solution Architect
+                                        <small>Member since Nov. 2012</small>
+                                    </p>
+                                </li>
+                                 <!-- Menu Body -->
+                                <li class="user-body">
+                                    <div class="col-xs-4 text-center">
+                                        <a href="https://twitter.com/Ralphive/followers">Followers</a>
+                                    </div>
+                                    <div class="col-xs-4 text-center">
+                                        <a href="https://twitter.com/Ralphive/following">Following</a>
+                                    </div>
+                                    <div class="col-xs-4 text-center">
+                                        <a href="#">Friends</a>
+                                    </div>
+                                </li>
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="https://twitter.com/Ralphive" class="btn btn-default btn-flat">Profile</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <div class="wrapper row-offcanvas row-offcanvas-left">
+            <!-- Left side column. contains the logo and sidebar -->
+            <aside class="left-side sidebar-offcanvas">
+                <!-- sidebar: style can be found in sidebar.less -->
+                <section class="sidebar">
+                    <!-- Sidebar user panel -->
+                    <div class="user-panel">
+                        <div class="pull-left image">
+                            <img src="img/avatar3.png" class="img-circle" alt="User Image">
+                        </div>
+                        <div class="pull-left info">
+                            <p>Hello, Ralph</p>
+                            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                        </div>
+                    </div>
+                    <!-- search form -->
+                    <form action="#" method="get" class="sidebar-form">
+                        <div class="input-group">
+                            <input type="text" name="q" class="form-control" placeholder="Search...">
+                            <span class="input-group-btn">
+                                <button type="submit" name="seach" id="search-btn" class="btn btn-flat">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                    <!-- /.search form -->
+                    <!-- sidebar menu: : style can be found in sidebar.less -->
+                    <ul class="sidebar-menu">
+                        <li class="active">
+                            <a href="index.html">
+
+                                <i class="fa fa-text-height"></i> <span>Text Analysis</span>
+
+                            </a>
+                        </li>
+                        <li>
+                            <a href="sentiment.html">
+
+                                <i class="fa fa-heart"></i> <span>Sentiment Analysis</span> 
+
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mining.html">
+
+                                <i class="fa fa-sort-amount-desc"></i> <span>Text Mining</span> 
+
+                            </a>
+                        </li>
+                        <li>
+                            <a href="sapb1.html">
+
+                                <i class="fa fa-building-o"></i> <span>#SAPB1 tweets</span> 
+
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+                <!-- /.sidebar -->
+            </aside>
+            <!-- Right side column. Contains the navbar and content of the page -->
+            <aside class="right-side">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1>
+                        <i class="fa fa-sort-amount-desc"></i>&nbsp;Text Mining Functions</h1>
+                </section>
+                <!-- Main content -->
+                <section class="content" draggable="true">
+                    <!-- Small boxes (Stat box) -->
+                    <div class="input-group" draggable="true">
+                        <input type="text" name="q" placeholder="Text Mining Search..." class="form-control input-lg"
+                        id="MiningSearch">
+                        <span class="input-group-btn">
+                            <button type="submit" name="search" id="mining-btn" class="btn btn-flat input-lg">
+                                <i class="fa fa-search" draggable="true"></i>
+                            </button>
+                        </span>
+                    </div>
+                    <!-- /.row -->
+                    <!-- top row -->
+                    <!-- /.row -->
+                    <!-- Main row -->
+                    <hr>
+                    <div class="row">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="box box-primary">
+                                    <div class="box-header" draggable="true">
+                                        <i class="fa  fa-list-ol" draggable="true"></i>
+                                        <h3 class="box-title">Related Terms
+                                            <br>
+                                        </h3>
+                                        <button class="btn btn-primary btn-sm pull-right" data-widget="collapse"
+                                        data-toggle="tooltip" title="Collapse" style="margin-right: 5px;" draggable="true">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body table-responsive no-padding">
+                                        <table class="table table-hover" id="getRelatedTerms">
+                                            <tbody>
+                                                <tr></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                                <!-- /.box -->
+                            </div>
+                            <!-- /.box (chat box) -->
+                            <div class="col-xs-12">
+                                <div class="box box-danger">
+                                    <div class="box-header">
+                                        <i class="fa  fa-list-ol" draggable="true"></i>
+                                        <h3 class="box-title">Related Documents
+                                            <br>
+                                        </h3>
+                                        <button class="btn btn-primary btn-sm pull-right" data-widget="collapse"
+                                        data-toggle="tooltip" title="Collapse" style="margin-right: 5px;" draggable="true">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body table-responsive no-padding">
+                                        <table class="table table-hover" id="getRelatedDocuments">
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                                <!-- /.box -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- right col -->
+            </aside>
+        </div>
+        <!-- /.row (main row) -->
+        <!-- /.content -->
+        <!-- /.right-side -->
+        <!-- ./wrapper -->
+        <!-- jQuery 2.0.2 -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+        <!-- jQuery UI 1.10.3 -->
+        <script src="js/jquery-ui-1.10.3.min.js" type="text/javascript"></script>
+        <!-- Bootstrap -->
+        <script src="js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="js/mining.js" type="text/javascript"></script>
+        <script src="js/AdminLTE/app.js" type="text/javascript"></script>
+    </body>
+
+</html>

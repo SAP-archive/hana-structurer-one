@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.2" id="SAP_CA_USERS" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="crossClient" defaultLanguage="$$language$$" visibility="reportingEnabled" calculationScenarioType="SCRIPT_BASED" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" scriptParametersCaseSensitive="true">
+  <descriptions defaultDescription="SAP_CA_COUNTS"/>
+  <localVariables/>
+  <variableMappings/>
+  <dataSources/>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:SqlScriptView" id="Script_View">
+      <viewAttributes>
+        <viewAttribute datatype="NVARCHAR" id="ELEMENT" length="100"/>
+        <viewAttribute datatype="BIGINT" id="MENTIONS"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <definition> 
+ /********* Begin Procedure Script ************/ 
+ BEGIN 
+ 	 var_out =  
+ 		
+	SELECT	&quot;UserName&quot; as &quot;ELEMENT&quot;, 
+			COUNT(*) AS &quot;MENTIONS&quot;
+	FROM &quot;_SYS_BIC&quot;.&quot;Summit15.SAPB1.Models/SAP_AT_TWEETINFO&quot; 
+	GROUP BY &quot;UserName&quot;
+	ORDER BY &quot;UserName&quot; ASC;
+	
+ 	 
+END; /********* End Procedure Script ************/</definition>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Script_View">
+    <attributes>
+      <attribute id="ELEMENT" order="1">
+        <descriptions defaultDescription="USERS"/>
+        <keyMapping columnObjectName="Script_View" columnName="ELEMENT"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="MENTIONS" order="2" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="MENTIONS"/>
+        <measureMapping columnObjectName="Script_View" columnName="MENTIONS"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

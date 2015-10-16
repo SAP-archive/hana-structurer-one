@@ -1,0 +1,15 @@
+service namespace "Summit15.services"{
+ "_SYS_BIC"."Summit15.Models/SAP_AN_TWEETB" as "Mentions"
+  keys generate local "Id"
+  aggregates always (SUM of "Mentions");
+  
+   "_SYS_BIC"."Summit15.Models/SAP_AN_TWEETB" as "Impact"
+  keys generate local "Id"
+  aggregates always (SUM of "Impact");
+
+   "SUMMIT2015"."Summit15.data::tweetsb" as "Tweets"
+   	create forbidden
+	update forbidden
+	delete forbidden;
+ 
+}

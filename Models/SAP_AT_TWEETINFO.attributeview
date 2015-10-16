@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Dimension:dimension xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" schemaVersion="1.2" id="SAP_AT_TWEETINFO" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" visibility="internal" dimensionType="Standard">
+  <descriptions defaultDescription="SAP_AT_TWEETINFO"/>
+  <attributes>
+    <attribute id="Id" order="1" attributeHierarchyActive="false" displayAttribute="false" key="true">
+      <descriptions defaultDescription="Id"/>
+      <keyMapping schemaName="SUMMIT2015" columnObjectName="Summit15.data::tweets" columnName="Id"/>
+    </attribute>
+    <attribute id="UserName" order="2" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="UserName"/>
+      <keyMapping schemaName="SUMMIT2015" columnObjectName="Summit15.data::tweets" columnName="UserName"/>
+    </attribute>
+    <attribute id="ProfileImg" order="3" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="ProfileImg"/>
+      <keyMapping schemaName="SUMMIT2015" columnObjectName="Summit15.data::tweets" columnName="ProfileImg"/>
+    </attribute>
+    <attribute id="Followers" order="4" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="Followers"/>
+      <keyMapping schemaName="SUMMIT2015" columnObjectName="Summit15.data::tweets" columnName="Followers"/>
+    </attribute>
+    <attribute id="Location" order="5" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="Location"/>
+      <keyMapping schemaName="SUMMIT2015" columnObjectName="Summit15.data::tweets" columnName="Location"/>
+    </attribute>
+    <attribute id="Text" order="6" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="Text"/>
+      <keyMapping schemaName="SUMMIT2015" columnObjectName="Summit15.data::tweets" columnName="Text"/>
+    </attribute>
+    <attribute id="Keyword" order="7" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="Keyword"/>
+      <keyMapping schemaName="SUMMIT2015" columnObjectName="Summit15.data::tweets" columnName="Keyword"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <privateDataFoundation>
+    <tableProxies>
+      <tableProxy>
+        <table schemaName="SUMMIT2015" columnObjectName="Summit15.data::tweets"/>
+      </tableProxy>
+    </tableProxies>
+    <joins/>
+    <layout>
+      <shapes>
+        <shape modelObjectName="Summit15.data::tweets" modelObjectNameSpace="SUMMIT2015" modelObjectType="catalog">
+          <upperLeftCorner x="70" y="30"/>
+        </shape>
+        <shape modelObjectName="DataFoundation" modelObjectNameSpace="DataFoundation" modelObjectType="repository">
+          <upperLeftCorner x="40" y="85"/>
+          <rectangleSize height="0" width="0"/>
+        </shape>
+      </shapes>
+    </layout>
+  </privateDataFoundation>
+  <hierarchies/>
+</Dimension:dimension>

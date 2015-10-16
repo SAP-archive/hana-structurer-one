@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Cube:cube xmlns:Cube="http://www.sap.com/ndb/BiModelCube.ecore" schemaVersion="1.5" id="SAP_AN_TWEETB" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" visibility="reportingEnabled">
+  <descriptions defaultDescription="SAP_AN_TWEET"/>
+  <localVariables/>
+  <privateMeasureGroup id="MeasureGroup">
+    <attributes>
+      <attribute id="Element" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Element"/>
+        <keyMapping schemaName="SUMMIT2015" columnObjectName="$TA_TWEETSB" columnName="TA_TOKEN"/>
+      </attribute>
+      <attribute id="Type" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Type"/>
+        <keyMapping schemaName="SUMMIT2015" columnObjectName="$TA_TWEETSB" columnName="TA_TYPE"/>
+      </attribute>
+      <attribute id="TA_NORMALIZED" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="TA_NORMALIZED"/>
+        <keyMapping schemaName="SUMMIT2015" columnObjectName="$TA_TWEETSB" columnName="TA_NORMALIZED"/>
+      </attribute>
+      <attribute id="Id_1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Id_1"/>
+        <keyMapping schemaName="SUMMIT2015" columnObjectName="$TA_TWEETSB" columnName="Id"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies>
+        <tableProxy centralTable="true">
+          <table schemaName="SUMMIT2015" columnObjectName="$TA_TWEETSB"/>
+        </tableProxy>
+      </tableProxies>
+      <joins/>
+      <layout>
+        <shapes>
+          <shape modelObjectName="$TA_TWEETSB" modelObjectNameSpace="SUMMIT2015" modelObjectType="catalog">
+            <upperLeftCorner x="70" y="30"/>
+          </shape>
+        </shapes>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="Mentions" order="1" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="Mentions"/>
+        <measureMapping schemaName="SUMMIT2015" columnObjectName="$TA_TWEETSB" columnName="TA_COUNTER"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures>
+      <measure id="Impact" hidden="false" order="5" aggregationType="sum" measureType="simple" calculateBeforeAggregation="false" datatype="INTEGER">
+        <descriptions defaultDescription="People Reached"/>
+        <formula>&quot;Followers&quot;</formula>
+      </measure>
+    </calculatedMeasures>
+    <restrictedMeasures/>
+    <sharedDimensions>
+      <logicalJoin associatedObjectUri="/Summit15.Models/attributeviews/SAP_AT_LOCATIONB">
+        <attributes>
+          <attributeRef>#Id_1</attributeRef>
+        </attributes>
+        <associatedAttributeNames>
+          <attributeName>Id</attributeName>
+        </associatedAttributeNames>
+        <properties joinOperator="Equal" joinType="referential"/>
+        <associatedAttributeFeatures>
+          <attributeReference alias="SAP_AT_LOCATION_Id" attributeName="Id" hidden="true"/>
+        </associatedAttributeFeatures>
+      </logicalJoin>
+      <logicalJoin associatedObjectUri="/Summit15.Models/attributeviews/SAP_AT_TWEETINFOB">
+        <attributes>
+          <attributeRef>#Id_1</attributeRef>
+        </attributes>
+        <associatedAttributeNames>
+          <attributeName>Id</attributeName>
+        </associatedAttributeNames>
+        <properties joinOperator="Equal" joinType="referential"/>
+        <associatedAttributeFeatures/>
+      </logicalJoin>
+    </sharedDimensions>
+    <layout>
+      <shapes>
+        <shape modelObjectName="MEASURE_GROUP" modelObjectType="repository">
+          <upperLeftCorner x="26" y="204"/>
+        </shape>
+        <shape modelObjectName="/Summit15.Models/attributeviews/SAP_AT_LOCATION.attributeview" modelObjectType="repository">
+          <upperLeftCorner x="340" y="30"/>
+        </shape>
+        <shape modelObjectName="/Summit15.Models/attributeviews/SAP_AT_TWEETINFO.attributeview" modelObjectType="repository">
+          <upperLeftCorner x="291" y="311"/>
+        </shape>
+        <shape modelObjectName="LogicalView" modelObjectNameSpace="MeasureGroup" modelObjectType="repository">
+          <upperLeftCorner x="40" y="85"/>
+          <rectangleSize height="0" width="0"/>
+        </shape>
+      </shapes>
+    </layout>
+  </privateMeasureGroup>
+</Cube:cube>

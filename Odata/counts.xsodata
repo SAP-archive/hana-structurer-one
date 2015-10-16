@@ -1,0 +1,26 @@
+service namespace "Summit15.services"{
+
+  // Text Analysis
+  "SUMMIT2015"."Summit15.data::tweets" as "Tweets"
+  	create forbidden
+	update forbidden
+	delete forbidden;
+  
+  "_SYS_BIC"."Summit15.Models.Counts/SAP_CA_COMPANIES" as "Companies" keys("COUNTS");
+  
+  "_SYS_BIC"."Summit15.Models.Counts/SAP_CA_PEOPLE" as "People" keys("COUNTS");
+    
+  "_SYS_BIC"."Summit15.Models.Counts/SAP_CA_USERS" as "Users" keys("COUNTS");
+    
+ // Sentiment Analysis
+  "SUMMIT2015"."Summit15.data::tweetsb" as "Tweetsb"
+	create forbidden
+	update forbidden
+	delete forbidden;
+   "_SYS_BIC"."Summit15.Models.Counts/SAP_CA_SENTIMENTS" as "Sentiments" keys("COUNTS", "BRAND");
+  
+   
+ 
+ 
+ 
+}

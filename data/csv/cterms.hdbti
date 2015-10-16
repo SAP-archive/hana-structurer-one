@@ -1,0 +1,9 @@
+import = [
+     	     {
+     	     	schema = "SUMMIT2015";
+                table = "Summit15.data::cterms";
+                file = "Summit15.data.csv:cterms.csv";
+                header = false;
+                delimField = ",";
+            }
+         ];

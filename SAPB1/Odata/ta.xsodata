@@ -1,0 +1,13 @@
+service namespace "Summit15.services"{
+ "_SYS_BIC"."Summit15.SAPB1.Models/SAP_AN_TWEET" as "Mentions"
+  keys generate local "Id"
+  aggregates always (SUM of "Mentions");
+  
+   "_SYS_BIC"."Summit15.SAPB1.Models/SAP_AN_TWEET/olap" as "Impact"
+  keys generate local "Id"
+  aggregates always (SUM of "Impact");
+  
+  "_SYS_BIC"."Summit15.SAPB1.Models/SAP_AT_TWEETINFO" as "TweetInfo" keys ("UserName");
+  
+ 
+}

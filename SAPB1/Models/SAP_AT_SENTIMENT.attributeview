@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Dimension:dimension xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" schemaVersion="1.2" id="SAP_AT_SENTIMENT" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" visibility="internal" dimensionType="Standard">
+  <descriptions defaultDescription="SAP_AT_SENTIMENT"/>
+  <attributes>
+    <attribute id="Id" key="true" order="1" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="Id"/>
+      <keyMapping schemaName="SUMMIT2015" columnObjectName="$TA_SAPB1TWEETS" columnName="Id"/>
+    </attribute>
+    <attribute id="TA_COUNTER" key="true" order="2" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="TA_COUNTER"/>
+      <keyMapping schemaName="SUMMIT2015" columnObjectName="$TA_SAPB1TWEETS" columnName="TA_COUNTER"/>
+    </attribute>
+    <attribute id="TA_TOKEN" order="3" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="TA_TOKEN"/>
+      <keyMapping schemaName="SUMMIT2015" columnObjectName="$TA_SAPB1TWEETS" columnName="TA_TOKEN"/>
+    </attribute>
+    <attribute id="UserName" order="4" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="UserName"/>
+      <keyMapping schemaName="SUMMIT2015" columnObjectName="Summit15.data::sapb1tweets" columnName="UserName"/>
+    </attribute>
+    <attribute id="ProfileImg" order="5" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="ProfileImg"/>
+      <keyMapping schemaName="SUMMIT2015" columnObjectName="Summit15.data::sapb1tweets" columnName="ProfileImg"/>
+    </attribute>
+    <attribute id="Text" order="6" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="Text"/>
+      <keyMapping schemaName="SUMMIT2015" columnObjectName="Summit15.data::sapb1tweets" columnName="Text"/>
+    </attribute>
+    <attribute id="TA_TYPE" order="7" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="TA_TYPE"/>
+      <keyMapping schemaName="SUMMIT2015" columnObjectName="$TA_SAPB1TWEETS" columnName="TA_TYPE"/>
+    </attribute>
+    <attribute id="Location" order="8" attributeHierarchyActive="false" displayAttribute="false">
+      <descriptions defaultDescription="Location"/>
+      <keyMapping schemaName="SUMMIT2015" columnObjectName="Summit15.data::sapb1tweets" columnName="Location"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <privateDataFoundation>
+    <tableProxies>
+      <tableProxy>
+        <table schemaName="SUMMIT2015" columnObjectName="$TA_SAPB1TWEETS"/>
+      </tableProxy>
+      <tableProxy>
+        <table schemaName="SUMMIT2015" columnObjectName="Summit15.data::sapb1tweets"/>
+      </tableProxy>
+    </tableProxies>
+    <joins>
+      <join>
+        <leftTable schemaName="SUMMIT2015" columnObjectName="Summit15.data::sapb1tweets"/>
+        <rightTable schemaName="SUMMIT2015" columnObjectName="$TA_SAPB1TWEETS"/>
+        <leftColumns>
+          <columnName>Id</columnName>
+        </leftColumns>
+        <rightColumns>
+          <columnName>Id</columnName>
+        </rightColumns>
+        <properties joinOperator="Equal" joinType="referential"/>
+      </join>
+    </joins>
+    <layout>
+      <shapes>
+        <shape modelObjectName="$TA_SAPB1TWEETS" modelObjectNameSpace="SUMMIT2015" modelObjectType="catalog">
+          <upperLeftCorner x="70" y="30"/>
+        </shape>
+        <shape modelObjectName="Summit15.data::sapb1tweets" modelObjectNameSpace="SUMMIT2015" modelObjectType="catalog">
+          <upperLeftCorner x="357" y="30"/>
+        </shape>
+        <shape modelObjectName="DataFoundation" modelObjectNameSpace="DataFoundation" modelObjectType="repository">
+          <upperLeftCorner x="40" y="85"/>
+          <rectangleSize/>
+        </shape>
+      </shapes>
+    </layout>
+  </privateDataFoundation>
+  <hierarchies/>
+</Dimension:dimension>

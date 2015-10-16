@@ -1,0 +1,10 @@
+service namespace "Summit15.services"{
+  
+  "_SYS_BIC"."Summit15.Models.Tops/SAP_CA_COMPANIES" as "Companies" keys("ELEMENT");
+  
+  "_SYS_BIC"."Summit15.Models.Tops/SAP_CA_PEOPLE" as "People" keys("ELEMENT");
+  
+  "_SYS_BIC"."Summit15.Models.Tops/SAP_CA_SUBJECT" as "Subject" keys("SUBJECT");
+    
+  "_SYS_BIC"."Summit15.Models.Tops/SAP_CA_LOCATION" as "Location" keys("LOCATION");
+}

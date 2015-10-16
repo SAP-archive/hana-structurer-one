@@ -1,0 +1,6 @@
+table.schemaName = "SUMMIT2015";  
+table.tableType = COLUMNSTORE;  
+table.columns = [    
+    {name = "term"; sqlType = NVARCHAR; nullable = false; length = 140;}
+    ];   
+table.primaryKey.pkcolumns = ["term"];   

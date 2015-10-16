@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.2" id="SAP_CA_LOCATION" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="crossClient" defaultLanguage="$$language$$" visibility="reportingEnabled" calculationScenarioType="SCRIPT_BASED" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" scriptParametersCaseSensitive="true">
+  <descriptions defaultDescription="SAP_CA_COUNTS"/>
+  <localVariables/>
+  <variableMappings/>
+  <dataSources/>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:SqlScriptView" id="Script_View">
+      <viewAttributes>
+        <viewAttribute datatype="VARCHAR" id="LOCATION" length="2"/>
+        <viewAttribute datatype="BIGINT" id="MENTIONS"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <definition> 
+ /********* Begin Procedure Script ************/ 
+ BEGIN 
+ 	 var_out = 
+ 	
+ 	SELECT DISTINCT T1.&quot;A2&quot; as &quot;LOCATION&quot;,
+ 	 		SUM(T0.&quot;Mentions&quot;) AS &quot;MENTIONS&quot;
+ 	FROM &quot;_SYS_BIC&quot;.&quot;Summit15.SAPB1.Models/SAP_AN_TWEET&quot; as T0
+ 	left outer join &quot;SUMMIT2015&quot;.&quot;Summit15.data::country&quot; as T1
+ 	on UPPER(T0.&quot;COUNTRY&quot;) = T1.&quot;Country&quot;
+	WHERE T0.&quot;COUNTRY&quot; != ''
+	GROUP BY T1.&quot;A2&quot;
+	ORDER BY &quot;MENTIONS&quot; DESC;
+ 	 
+END; /********* End Procedure Script ************/</definition>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Script_View">
+    <attributes>
+      <attribute id="LOCATION" order="1">
+        <descriptions defaultDescription="USERS"/>
+        <keyMapping columnObjectName="Script_View" columnName="LOCATION"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="MENTIONS" order="2" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="MENTIONS"/>
+        <measureMapping columnObjectName="Script_View" columnName="MENTIONS"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>
