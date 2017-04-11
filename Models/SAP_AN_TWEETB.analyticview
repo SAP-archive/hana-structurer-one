@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Cube:cube xmlns:Cube="http://www.sap.com/ndb/BiModelCube.ecore" schemaVersion="1.5" id="SAP_AN_TWEETB" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" visibility="reportingEnabled">
+<Cube:cube xmlns:Cube="http://www.sap.com/ndb/BiModelCube.ecore" schemaVersion="1.5" id="SAP_AN_TWEETB" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="reportingEnabled">
   <descriptions defaultDescription="SAP_AN_TWEET"/>
   <localVariables/>
+  <informationModelLayout relativeWidthScenario="27"/>
   <privateMeasureGroup id="MeasureGroup">
     <attributes>
       <attribute id="Element" order="2" attributeHierarchyActive="false" displayAttribute="false">
@@ -44,7 +45,7 @@
       </measure>
     </baseMeasures>
     <calculatedMeasures>
-      <measure id="Impact" hidden="false" order="5" aggregationType="sum" measureType="simple" calculateBeforeAggregation="false" datatype="INTEGER">
+      <measure id="Impact" hidden="false" order="5" aggregationType="sum" measureType="simple" calculateBeforeAggregation="false" datatype="INTEGER" expressionLanguage="COLUMN_ENGINE">
         <descriptions defaultDescription="People Reached"/>
         <formula>&quot;Followers&quot;</formula>
       </measure>
@@ -58,7 +59,7 @@
         <associatedAttributeNames>
           <attributeName>Id</attributeName>
         </associatedAttributeNames>
-        <properties joinOperator="Equal" joinType="referential"/>
+        <properties joinOperator="Equal" joinType="inner"/>
         <associatedAttributeFeatures>
           <attributeReference alias="SAP_AT_LOCATION_Id" attributeName="Id" hidden="true"/>
         </associatedAttributeFeatures>
@@ -70,20 +71,20 @@
         <associatedAttributeNames>
           <attributeName>Id</attributeName>
         </associatedAttributeNames>
-        <properties joinOperator="Equal" joinType="referential"/>
+        <properties joinOperator="Equal" joinType="inner"/>
         <associatedAttributeFeatures/>
       </logicalJoin>
     </sharedDimensions>
     <layout>
       <shapes>
         <shape modelObjectName="MEASURE_GROUP" modelObjectType="repository">
-          <upperLeftCorner x="26" y="204"/>
+          <upperLeftCorner x="352" y="32"/>
         </shape>
-        <shape modelObjectName="/Summit15.Models/attributeviews/SAP_AT_LOCATION.attributeview" modelObjectType="repository">
-          <upperLeftCorner x="340" y="30"/>
+        <shape modelObjectName="/Summit15.Models/attributeviews/SAP_AT_LOCATIONB" modelObjectType="repository">
+          <upperLeftCorner x="703" y="32"/>
         </shape>
-        <shape modelObjectName="/Summit15.Models/attributeviews/SAP_AT_TWEETINFO.attributeview" modelObjectType="repository">
-          <upperLeftCorner x="291" y="311"/>
+        <shape modelObjectName="/Summit15.Models/attributeviews/SAP_AT_TWEETINFOB" modelObjectType="repository">
+          <upperLeftCorner x="16" y="16"/>
         </shape>
         <shape modelObjectName="LogicalView" modelObjectNameSpace="MeasureGroup" modelObjectType="repository">
           <upperLeftCorner x="40" y="85"/>
