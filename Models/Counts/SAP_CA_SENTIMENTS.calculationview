@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.2" id="SAP_CA_SENTIMENTS" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="crossClient" defaultLanguage="$$language$$" visibility="reportingEnabled" calculationScenarioType="SCRIPT_BASED" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" scriptParametersCaseSensitive="true">
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="SAP_CA_SENTIMENTS" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="crossClient" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="reportingEnabled" calculationScenarioType="SCRIPT_BASED" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" scriptParametersCaseSensitive="true">
   <descriptions defaultDescription="SAP_CA_COUNTS"/>
   <localVariables/>
   <variableMappings/>
+  <informationModelLayout relativeWidthScenario="27"/>
   <dataSources/>
   <calculationViews>
     <calculationView xsi:type="Calculation:SqlScriptView" id="Script_View">
+      <descriptions/>
       <viewAttributes>
         <viewAttribute datatype="VARCHAR" id="BRAND" length="100"/>
         <viewAttribute datatype="VARCHAR" id="SENTIMENT" length="100"/>
@@ -18,16 +20,20 @@
  	 var_out = 
  	 select &quot;Keyword&quot; as &quot;BRAND&quot;,
  	 		&quot;Type&quot; as &quot;SENTIMENT&quot;, count( distinct &quot;Element&quot;) as  &quot;COUNTS&quot;
- 	 from &quot;_SYS_BIC&quot;.&quot;Summit15.Models/SAP_AN_TWEETB&quot;
- 	 where &quot;Type&quot; in ('Sentiment', 'StrongPositiveSentiment',
- 	 				 'WeakPositiveSentiment', 'StrongNegativeSentiment',
- 	 				 'WeakNegativeSentiment', 'NeutralSentiment')
+ 	 from &quot;_SYS_BIC&quot;.&quot;Summit15.Models/SAP_CA_TWEETB&quot;
+ 	 --where &quot;Type&quot; in ('Sentiment', 'StrongPositiveSentiment',
+ 	 --				 'WeakPositiveSentiment', 'StrongNegativeSentiment',
+ 	 --				 'WeakNegativeSentiment', 'NeutralSentiment')
+	 -- &quot;Keyword&quot; != 'undefined' 
+	 where (&quot;Type&quot; like '%Positive%' 
+	 or &quot;Type&quot; like '%Negative%')
  	 group by &quot;Keyword&quot;, &quot;Type&quot;;
  	 
 END; /********* End Procedure Script ************/</definition>
     </calculationView>
   </calculationViews>
   <logicalModel id="Script_View">
+    <descriptions/>
     <attributes>
       <attribute id="BRAND" order="1">
         <descriptions defaultDescription="BRAND"/>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="SAP_DIM_TWEETINFOB" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="internal" calculationScenarioType="TREE_BASED" dataCategory="DIMENSION" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Projection">
+  <descriptions defaultDescription=""/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="27"/>
+  <dataSources>
+    <DataSource id="Summit15.data::tweetsb" type="DATA_BASE_TABLE">
+      <viewAttributes allViewAttributes="true"/>
+      <columnObject schemaName="SUMMIT2015" columnObjectName="Summit15.data::tweetsb"/>
+    </DataSource>
+  </dataSources>
+  <calculationViews/>
+  <logicalModel id="Summit15.data::tweetsb">
+    <descriptions/>
+    <attributes>
+      <attribute id="Id" key="true" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Id"/>
+        <keyMapping schemaName="SUMMIT2015" columnObjectName="Summit15.data::tweetsb" columnName="Id"/>
+      </attribute>
+      <attribute id="UserName" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="UserName"/>
+        <keyMapping schemaName="SUMMIT2015" columnObjectName="Summit15.data::tweetsb" columnName="UserName"/>
+      </attribute>
+      <attribute id="ProfileImg" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ProfileImg"/>
+        <keyMapping schemaName="SUMMIT2015" columnObjectName="Summit15.data::tweetsb" columnName="ProfileImg"/>
+      </attribute>
+      <attribute id="Followers" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Followers"/>
+        <keyMapping schemaName="SUMMIT2015" columnObjectName="Summit15.data::tweetsb" columnName="Followers"/>
+      </attribute>
+      <attribute id="Location" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Location"/>
+        <keyMapping schemaName="SUMMIT2015" columnObjectName="Summit15.data::tweetsb" columnName="Location"/>
+      </attribute>
+      <attribute id="Text" order="6" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Text"/>
+        <keyMapping schemaName="SUMMIT2015" columnObjectName="Summit15.data::tweetsb" columnName="Text"/>
+      </attribute>
+      <attribute id="Keyword" order="7" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Keyword"/>
+        <keyMapping schemaName="SUMMIT2015" columnObjectName="Summit15.data::tweetsb" columnName="Keyword"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures/>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

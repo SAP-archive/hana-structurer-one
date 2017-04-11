@@ -159,15 +159,23 @@ function loadDonut(brand){
 
 function loadLastTweets(Sentiment){
 	
-	var records = 8;
+	var records = 20;
 	/** Non Amazon tweets **/
 	
-	$.get( '../Odata/tab.xsodata/Mentions?&$top='+records+
-			'&$format=json&$filter=Keyword%20ne%20%27@Amazon%27%20and%20Type%20eq%20%27Strong'+Sentiment+'Sentiment%27', function() {
+	//TM
+	//$.get( '../Odata/tab.xsodata/Mentions?&$top='+records+
+	//		'&$format=json&$filter=Keyword%20ne%20%27@Amazon%27%20and%20Type%20eq%20%27Strong'+Sentiment+'Sentiment%27', function() {
 		// if success do something
+	
+	//TM
+		$.get( '../Odata/tab.xsodata/Mentions?&$top='+records+
+				'&$format=json&$filter=Type%20eq%20%27Strong'+Sentiment+'Sentiment%27'+
+				'&$orderby=SAP_AT_LOCATION_Id desc', function() {
 	})
 	.done(function(json) {		
 	//	alert(JSON.stringify(json.d.results.length));
+		
+		var prevText = ''; //TM
 		
 		for (var i=0;i<json.d.results.length;i++){
 			var image = json.d.results[i].ProfileImg;
@@ -177,6 +185,13 @@ function loadLastTweets(Sentiment){
 			var text = json.d.results[i].Text;
 			var location = json.d.results[i].Location;
 			
+			if (location == null) {		//TM
+				location = 'Disabled';
+			};
+			
+			if (prevText != text) {	//TM
+				prevText = text;	//TM
+				
 			$("#"+Sentiment+"-box").append(
 					
 				'<div class="item">'+
@@ -188,12 +203,22 @@ function loadLastTweets(Sentiment){
 	                 '</p>'+
 	              '</div>'
 	         );
+			}; //TM
 		}	
 	})
 
 	.fail(function() {
 		$("#tweet-box").append(
 				'ERROR');	
+	});
+}
+
+function refreshLastTweets(Sentiment){
+	
+	$("#"+Sentiment+"-box").fadeOut('slow', function() {
+		$("#"+Sentiment+"-box").empty();
+		loadLastTweets(Sentiment);	
+		$("#"+Sentiment+"-box").fadeIn('slow');
 	});
 }
 
@@ -213,4 +238,13 @@ function refreshBox(boxId, json){
 				json);	
 		$(boxId).fadeIn('slow');
 	});
+	
+	//TM
+	if (boxId=="#box3"){
+		refreshLastTweets('Positive');
+	};
+		
+	if (boxId=="#box4"){
+			refreshLastTweets('Negative');
+	};
 }	

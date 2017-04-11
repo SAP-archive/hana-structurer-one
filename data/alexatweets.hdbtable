@@ -12,6 +12,6 @@ table.columns = [
     {name = "CreateAt"; sqlType = DATE; nullable = false;}    
     ];   
 table.indexes =  [
-    {name = "B1DATE"; unique = false; order = DSC; indexColumns = ["CreateAt"];},
-    {name = "B1FOLLOWERS"; unique = false; order = DSC; indexColumns = ["Followers"];}];
+    {name = "AlexaDATE"; unique = false; order = DSC; indexColumns = ["CreateAt"];},
+    {name = "AlexaFOLLOWERS"; unique = false; order = DSC; indexColumns = ["Followers"];}];
 table.primaryKey.pkcolumns = ["Id"];   

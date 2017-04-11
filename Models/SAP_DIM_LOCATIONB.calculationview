@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="SAP_DIM_LOCATIONB" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="internal" calculationScenarioType="TREE_BASED" dataCategory="DIMENSION" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Projection">
+  <descriptions defaultDescription=""/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="27"/>
+  <dataSources>
+    <DataSource id="$TA_LOCATIONB" type="DATA_BASE_TABLE">
+      <viewAttributes allViewAttributes="true"/>
+      <columnObject schemaName="SUMMIT2015" columnObjectName="$TA_LOCATIONB"/>
+    </DataSource>
+  </dataSources>
+  <calculationViews/>
+  <logicalModel id="$TA_LOCATIONB">
+    <descriptions/>
+    <attributes>
+      <attribute id="Id" key="true" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Id"/>
+        <keyMapping schemaName="SUMMIT2015" columnObjectName="$TA_LOCATIONB" columnName="Id"/>
+      </attribute>
+      <attribute id="TA_TOKEN" hidden="true" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="TA_TOKEN"/>
+        <keyMapping schemaName="SUMMIT2015" columnObjectName="$TA_LOCATIONB" columnName="TA_TOKEN"/>
+      </attribute>
+      <attribute id="TA_TYPE" hidden="true" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="TA_TYPE"/>
+        <keyMapping schemaName="SUMMIT2015" columnObjectName="$TA_LOCATIONB" columnName="TA_TYPE"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes>
+      <calculatedAttribute id="COUNTRY" hidden="false" order="4" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="COUNTRY"/>
+        <keyCalculation datatype="VARCHAR" expressionLanguage="COLUMN_ENGINE" length="50">
+          <formula>if(&quot;TA_TYPE&quot;= 'COUNTRY',&quot;TA_TOKEN&quot;,'')</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+      <calculatedAttribute id="CITY" hidden="false" order="5" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CITY"/>
+        <keyCalculation datatype="VARCHAR" expressionLanguage="COLUMN_ENGINE" length="50">
+          <formula>if(&quot;TA_TYPE&quot;= 'LOCALITY',&quot;TA_TOKEN&quot;,'')</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+    </calculatedAttributes>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures/>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>
