@@ -3,7 +3,7 @@ var query =
 	' DISTINCT "UserName" , "ProfileImg", "Location", "Text", "TA_TYPE", "Id"' + 
 	'FROM "_SYS_BIC"."Summit15.SAPB1.Models/SAP_AT_SENTIMENT"' + 
 	'WHERE "TA_TYPE" IN ('+ "'WeakNegativeSentiment', 'WeakPositiveSentiment', 'StrongNegativeSentiment','StrongPositiveSentiment') ";
- 
+
 function showData(query){
 	conn = $.db.getConnection();
 	pstmt = conn.prepareStatement(query);
@@ -19,8 +19,8 @@ function showData(query){
 		result.data = [ {
 			UserName : rs.getString(1), //Attribute 2
 			ProfileImg : rs.getString(2),	//Attribute 2
-			Location : rs.getString(3),	//Attribute 3
-			Text : rs.getString(4),	//Attribute 4
+			Location : rs.getNString(3),	//Attribute 3
+			Text : rs.getNString(4),	//Attribute 4
 			Type : rs.getString(5),	//Attribute 4
 			Id	 : rs.getString(6)
 

@@ -15,9 +15,9 @@ function showData(){
 		var result = {};
 		var counter = 0;
 		result.data = [ {
-			Id : rs.getString(1), //Attribute 2
-			TA_TOKEN : rs.getString(2),	//Attribute 2
-			TA_TYPE : rs.getString(3)	//Attribute 3
+			Id : rs.getNString(1), //Attribute 2
+			TA_TOKEN : rs.getNString(2),	//Attribute 2
+			TA_TYPE : rs.getNString(3)	//Attribute 3
 			
 
 
@@ -26,9 +26,9 @@ function showData(){
 		while (rs.next()) {
 			counter++;
 			result.data[counter] = {
-					Id : rs.getString(1), //Attribute 2
-					TA_TOKEN : rs.getString(2),	//Attribute 2
-					TA_TYPE : rs.getString(3),	//Attribute 3
+					Id : rs.getNString(1), //Attribute 2
+					TA_TOKEN : rs.getNString(2),	//Attribute 2
+					TA_TYPE : rs.getNString(3),	//Attribute 3
 					query : query2
 			};
 		}
