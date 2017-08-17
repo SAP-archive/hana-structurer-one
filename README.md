@@ -14,3 +14,9 @@ This app analizes data from tweets. To run the the data retriever scripts:<br>
 - Fill the scripts with your HANA System credentials and Twitter App Key (https://apps.twitter.com/)<br>
 - To start the scrpits:<br>
     node scriptname.js
+    
+# Demo
+ - [Sample demo on Youtube](https://www.youtube.com/watch?v=q6dCTP9AkbA]
+ 
+ # Info 
+ on [this blog by Ralph](https://blogs.sap.com/2015/07/03/sap-hana-real-time-sentiment-analysis-and-text-mining-app/)
