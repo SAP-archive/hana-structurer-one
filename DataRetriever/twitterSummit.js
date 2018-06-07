@@ -1,165 +1,151 @@
 //Load Twitter node Libraries
-var util 	= require('util'),
-	twitter = require('twitter'),
-	hdb		= require('hdb');
+var util = require("util"),
+	twitter = require('twitter-stream-channels'),
+	hdb = require('hdb');
 
-var toFile = false; // format the output as if a sql file is generated
-var keyword = '#news'; // Only applicable if toFile = true
+//Twitter credentials
+var credentials = {
+	consumer_key: process.env.TWITTER_KEY || "< Your Consumer Key > ",
+	consumer_secret: process.env.TWITTER_SECRET || "< Your Consumer Secret > ",
+	access_token: process.env.TWITTER_TOKEN || "< Your Token> ",
+	access_token_secret: process.env.TWITTER_TOKEN_SECRET || "< Your Token Secret KEY> "
+}
 
+//Twitter Search Channels
+var channels = {
+	"news": ['#news', '#noticias', '#nouvelles'],
+	"brands": ['@Starbucks', '@Amazon', '@Target', '@BestBuy'],
+	"erp": ['#SAPBusinessOne', "#SAPByDesign", 'SAPB1', '#SAPBYD'],
+	"alexa": ['iMiniServer'],
+};
 
-//Log on twitter
-var twit = new twitter({
-	consumer_key: '',
-	consumer_secret: '',
-	access_token_key: '',
-	access_token_secret: ''
-});
+var twit = new twitter(credentials);
 
 //Create Hana Client
 var client = hdb.createClient({
-	host     : '11.24.230.207',
-	port     : 30015,
-	user     : 'SYSTEM',
-	password : 'manager'
-});  
+	host: process.env.HDB_ADDR || '< Your HDB ADDRESS >',
+	port: process.env.HDB_PORT || '< Your HDB PORT >',
+	user: process.env.HDB_USER || '< Your HDB USER >',
+	password: process.env.HDB_PSWD || '< Your HDB PASSWORD >'
+});
 
 
 
-// Start Application
-if(toFile){
-	streamTweets(keyword)
-}else{
-	streamTweets(keyword)
+var stream = twit.streamChannels({ track: channels });
 
-	//start();
+connectHdb(false, function () {
+	// Only stream if HANA is available
+	stream.on('channels', function (tweet) {
+		saveTweet(tweet)
+	});
+});
+
+process.stdin.resume()
+
+process.on('exit', exitHandler.bind());
+//catches ctrl+c event
+process.on('SIGINT', exitHandler.bind());
+// catches "kill pid" (for example: nodemon restart)
+process.on('SIGUSR1', exitHandler.bind());
+process.on('SIGUSR2', exitHandler.bind());
+
+//catches uncaught exceptions
+process.on('uncaughtException', exitHandler.bind());
+
+function exitHandler(options, err) {
+
+	console.log('clean')
+	stream.close()
+	connectHdb(false);
 }
 
-//Stream tweets in real time;
-function streamTweets(keyword){
-	connectHdb(false);
-	
-	if(!toFile){
-		console.log('--============================================');
-		console.log('--STREAMING TWEETS FOR: ' + keyword);
-		console.log('--============================================');
-	}
-	
+function saveTweet(tweet) {
 
-	twit.stream('statuses/filter',{track: keyword}, function(stream) {
-		stream.on('data', function(data) {
-			var id_str = util.inspect(data.id_str);
-			var screen_name = util.inspect(data.user.screen_name);
-			var text = util.inspect(data.text);
-			var profile_image_url = util.inspect(data.user.profile_image_url);				
-			var created_at = util.inspect(data.created_at);
-			var followers_count = util.inspect(data.user.followers_count);
-			var lang = util.inspect(data.lang);
-			var location = util.inspect(data.user.location);
-			var geo = util.inspect(data.geo);
-			var coordinates = util.inspect(data.coordinates);
-			
-			text = text.replace(/'/g, " ");
-			text = "'"+text.trim()+"'";
-		//	var t = JSON.stringify(data);
-		//	wstream.write(data);
+	if (tweet.text.search("RT @") != -1) {
+		console.log("Retweet Ignored")
+		return
+	} else {
 
-			if(!toFile){
-				console.log('Tweet ID: ' + id_str);
-				console.log('User: @' + screen_name);
-				console.log('Text: '+ text);
-				console.log('Profile Pic: '+ profile_image_url);
-				console.log('Date: '+ formatDate(created_at));
-				console.log('Followers: '+ followers_count);
-				console.log('Language: '+ lang);
-				console.log('Location: '+ location);
-				console.log('Geo: '+ geo);
-				console.log('Coordinates: '+ coordinates);
-				console.log('---------------------------');
+		var values = '';
+		var channel = Object.keys(tweet["$channels"])
+
+		//Format some values
+		channel = channel[0]
+		tweet.text = tweet.text.replace(/'/g, " ");
+		tweet.created_at = formatDate(tweet.created_at)
+
+		values = values.concat(util.inspect(tweet.id_str), ',');
+		values = values.concat(util.inspect(tweet.user.screen_name), ',');
+		values = values.concat(util.inspect(tweet.user.profile_image_url), ',');
+		values = values.concat(tweet.user.followers_count, ',');
+		values = values.concat(util.inspect(tweet.text), ',');
+		values = values.concat(util.inspect(channel), ',');
+		values = values.concat(util.inspect(tweet.lang), ',');
+		values = values.concat(util.inspect(tweet.user.location), ',');
+		values = values.concat(util.inspect(tweet.created_at), ')');
+
+		console.log('>' + channel, tweet.user.screen_name);
+		console.log('>' + channel, tweet.text);
+
+		var sql = 'INSERT INTO "SUMMIT2015"."Summit15.data::'
+
+		switch (channel) {
+			case "news":
+				sql += "tweets"
+				break
+			case "brands":
+				sql += "tweetsb"
+				break
+			case "erp":
+				sql += "sapb1tweets"
+				break
+			case "alexa":
+				sql += "alexatweets"
+				break
+			default:
+				console.error("No Channel Found, tweet ignored")
+				return;
+
+		}
+
+		sql += '" values(' + values
+
+		client.exec(sql, function (err, affectedRows) {
+
+			if (err) {
+				return console.error('ERROR: ', err);
 			}
-
-			// Exclude retweets
-			if (text.search("RT @")== -1){
-				saveTweet(id_str, screen_name, profile_image_url, followers_count, text,keyword, lang, location, formatDate(created_at));
-			}			
+			console.log('Tweet Inserted with success!');
 		});
-		stream.on('error', function(err){
-		console.log(err);
+	};
+}
+
+
+function connectHdb(disconnect, callback) {
+
+	if (disconnect) {
+		client.end();
+	} else {
+		client.connect(function (err) {
+			if (err) {
+				console.error('Connect error', err);
+			} else {
+				callback()
+			}
 		});
-	});
-};
-
-
-function saveTweet(id, user, pic, followers, text, kw, lang, loca, date){
-
-	
-
-	var sql = 'INSERT INTO "SUMMIT2015"."Summit15.data::tweets" values(';
-
-	sql = sql.concat(id,',');
-	sql = sql.concat(user,',');
-	sql = sql.concat(pic,',');
-	sql = sql.concat(followers,',');
-	sql = sql.concat(text,',');
-	sql = sql.concat("'",kw,"'",',');
-	sql = sql.concat(lang,',');
-	sql = sql.concat(loca,',');
-	sql = sql.concat("'",date,"'",')');
-	
-	if (toFile){
-		console.log(sql); 
-		return;  	 
+		console.log("HDB Connected!");
 	}
-		
-	
-	
-	//connectHdb(false);
-	
-	client.exec(sql, function (err, affectedRows) {  
-
-		if (err) {  
-			return console.error('ERROR: ', err);  
-		} 
-
-		console.log('Tweet ' + id+ ' Inserted with success!');  
-	});
-	
-	//connectHdb(true);
-	count = 0;
-	sql = '';
-	
-
 };
 
-function connectHdb(disconnect){
-
-	if(disconnect){
-		client.end();  
-		return;
-	}
-
-	client.connect(function(err) {  
-		if (err)   
-			return console.error('Connect error', err);
-
-	});  
-	console.log("HDB Connected!");
-};
-
-
-function formatDate(strdate){
+function formatDate(strdate) {
 	// Return date with YYYY-MM-DD
 	// Twitter date example 'Mon Jan 19 16:17:07 +0000 2015'
 	// 'Mon Jan 19 16:17:07 +0000 2015'
-	
-	var day = strdate.substring(9,11);
-	var month = "JanFebMarAprMayJunJulAugSepOctNovDec".indexOf(strdate.substring(5,8)) / 3 + 1; 
-	var year  = strdate.substring(strdate.length-5,strdate.length-1);
-	
-	/*	
-  	console.log(year);
-	console.log(month);
-	console.log(day);
-	**/
-	
-	return(year+"-"+month+"-"+day);
+	var day = strdate.substring(9, 11);
+	if (day < 10) { day = "0" + day }
+	var month = "JanFebMarAprMayJunJulAugSepOctNovDec".indexOf(strdate.substring(4, 7)) / 3 + 1;
+	if (month < 10) { month = "0" + month }
+	var year = strdate.substring(strdate.length - 4, strdate.length);
+	var date = year + "-" + month + "-" + day
+	return date.trim();
 }
