@@ -35,18 +35,6 @@ $(document).ready(function(){
  $(function() {
  	"use strict";
 
-    //If window is small enough, enable sidebar push menu
-    if ($(window).width() <= 992) {
-        $('.row-offcanvas').toggleClass('active');
-        $('.left-side').removeClass("collapse-left");
-        $(".right-side").removeClass("strech");
-        $('.row-offcanvas').toggleClass("relative");
-    } else {
-        //Else, enable content streching
-        $('.left-side').toggleClass("collapse-left");
-        $(".right-side").toggleClass("strech");
-    }
-
  	loadBoxes();
  	setInterval("loadBoxes();",3000); 
 
