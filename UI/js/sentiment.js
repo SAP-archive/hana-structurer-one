@@ -140,7 +140,7 @@ function loadDonut(brand){
 		}
 
 	    var donut = new Morris.Donut({
-	        element: 'donut-'+brand,
+	        element: 'donut-'+json.d.results[0].BRAND,
 	        resize: true,
 	        colors: ["#3c8dbc", "#f56954","#FE9A2E", "#A901DB", "#00a65a" ],
 	        data: jsonArr,
