@@ -15,7 +15,7 @@ var credentials = {
 var channels = {
 	"news": ['#news', '#noticias', '#nouvelles'],
 	"brands": ['@Starbucks', '@Amazon', '@Target', '@BestBuy'],
-	"erp": ['#SAPBusinessOne', "#SAPByDesign", 'SAPB1', '#SAPBYD'],
+	"erp": ['#SAPBusinessOne','SAPB1'],
 	"alexa": ['iMiniServer'],
 };
 
@@ -79,7 +79,15 @@ function saveTweet(tweet) {
 		values = values.concat(util.inspect(tweet.user.profile_image_url), ',');
 		values = values.concat(tweet.user.followers_count, ',');
 		values = values.concat(util.inspect(tweet.text), ',');
-		values = values.concat(util.inspect(channel), ',');
+		if (channel == "brands"){
+			var brand = tweet['$keywords'][0]
+			brand = brand.toLowerCase()
+			values = values.concat(util.inspect(brand), ',');	
+		}else{
+			values = values.concat(util.inspect(channel), ',');
+		}
+		
+		
 		values = values.concat(util.inspect(tweet.lang), ',');
 		values = values.concat(util.inspect(tweet.user.location), ',');
 		values = values.concat(util.inspect(tweet.created_at), ')');

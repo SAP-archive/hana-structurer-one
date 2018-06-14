@@ -12,10 +12,10 @@ $(function() {
     loadBoxes();
     setInterval("loadBoxes();",3000); 
 
-    loadDonut('Amazon');
-    loadDonut('BestBuy');
-    loadDonut('Starbucks');
-    loadDonut('Target');
+	loadDonut('amazon');
+    loadDonut('bestbuy');
+    loadDonut('starbucks');
+    loadDonut('target');
     loadLastTweets('Positive');
     loadLastTweets('Negative');
 
