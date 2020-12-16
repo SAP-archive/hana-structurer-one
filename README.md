@@ -1,3 +1,4 @@
+[![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/hana-structurer-one)](https://api.reuse.software/info/github.com/SAP-samples/hana-structurer-one)
 [![License: Apache2](https://img.shields.io/badge/License-Apache2-green.svg)](https://opensource.org/licenses/Apache-2.0)
 # hana-structurer-one
 [![SAP](https://i.imgur.com/Dny1qdn.png)](https://cloudplatform.sap.com)
