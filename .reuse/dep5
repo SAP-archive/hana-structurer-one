@@ -1,0 +1,10 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: hana-structurer-one
+Upstream-Contact: Ralphive <>
+Source: https://github.com/SAP-Samples/hana-structurer-one
+
+# Sample paragraph, commented out:
+#
+Files: * 
+Copyright: 2020 SAP SE or an SAP affiliate company and hana-structurer-one contributors
+License: Apache-2.0
