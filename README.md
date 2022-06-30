@@ -8,7 +8,6 @@ SAP HANA Extreme application, built on XS Engine,  that analyses structured data
 
  * [Demo on Youtube](https://www.youtube.com/watch?v=q6dCTP9AkbA)
 
-
 ## Requirements
 * [NodeJS Runtime](https://nodejs.org/en/download/)
 * [Twitter API Keys](https://apps.twitter.com/)
