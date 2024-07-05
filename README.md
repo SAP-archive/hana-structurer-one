@@ -2,6 +2,8 @@
 [![License: Apache2](https://img.shields.io/badge/License-Apache2-green.svg)](https://opensource.org/licenses/Apache-2.0)
 # hana-structurer-one
 [![SAP](https://i.imgur.com/Dny1qdn.png)](#)
+[![Not Maintained](https://img.shields.io/badge/Maintenance%20Level-Not%20Maintained-yellow.svg)](https://gist.github.com/cheerfulstoic/d107229326a01ff0f333a1d3476e068d)
+
 
 ## Description
 SAP HANA Extreme application, built on XS Engine,  that analyses structured data (tweets) to retrieve information such as Location, People, Companies and also Sentiment Analysis. [Details in this blog](https://blogs.sap.com/2015/07/03/sap-hana-real-time-sentiment-analysis-and-text-mining-app/)
